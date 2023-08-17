@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
+import {useTokenStore} from "../stores/sign-in";
+const storeToken = useTokenStore();
 
 const login = ref<string>('');
 const password = ref<string>('');
@@ -23,11 +25,7 @@ const password = ref<string>('');
         <q-separator inset />
 
         <q-card-section>
-          <q-btn color="secondary" label="Login" />
-<!--          {{login}}-->
-<!--          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod-->
-<!--          tempor incididunt ut labore et dolore magna aliqua.-->
-<!--          {{password}}-->
+          <q-btn color="secondary" label="Login" @click="storeToken.login(login, password)"/>{{storeToken.count}}
         </q-card-section>
       </q-card>
     </div>
