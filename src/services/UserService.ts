@@ -19,4 +19,8 @@ export default class UserService{
     static async deleteUser(data: UserResponse):Promise<AxiosResponse<UserResponse>>{
         return $api.delete(`/users/${data.id}`)
     }
+
+    static async createUser(data: UserResponse):Promise<AxiosResponse<UserResponse>>{
+        return $api.post(`/users`, {...data})
+    }
 }

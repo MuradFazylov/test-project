@@ -9,7 +9,8 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        layout: 'DefaultLayout'
       }
     },
     {
@@ -17,13 +18,34 @@ const router = createRouter({
       name: 'user',
       component: () => import('../views/UserPage.vue'),
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        layout: 'DefaultLayout'
+      }
+    },
+    {
+      path: '/user/new',
+      name: 'new',
+      component: () => import('../views/NewUserPage.vue'),
+      meta: {
+        requiresAuth: true,
+        layout: 'DefaultLayout'
       }
     },
     {
       path: '/sign-in',
       name: 'sign-in',
-      component: () => import('../views/SignIn.vue')
+      component: () => import('../views/SignIn.vue'),
+      meta: {
+        layout: 'LoginLayout'
+      }
+    },
+    {
+      path: '/sign-up',
+      name: 'sign-up',
+      component: () => import('../views/SignUp.vue'),
+      meta: {
+        layout: 'LoginLayout'
+      }
     },
   ]
 })

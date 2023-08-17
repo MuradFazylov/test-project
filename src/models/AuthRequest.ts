@@ -1,5 +1,4 @@
-export interface AuthResponse {
-    token: string,
+export interface AuthRequest {
     password: string,
     login: string,
     firstname: string,

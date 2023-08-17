@@ -7,15 +7,20 @@ const storeToken = useTokenStore();
 
 const login = ref<string>('');
 const password = ref<string>('');
+const firstname = ref<string>('');
+const lastname = ref<string>('');
 
-const SignIn = async () => {
-  let result = await storeToken.login(login.value, password.value);
-  if (result == 201) {
-    router.push(`/`)
-  }
-}
 const SignUp = async () => {
-  router.push(`/sign-up`)
+  const data = {
+    login: login.value,
+    password: password.value,
+    firstname: firstname.value,
+    lastname: lastname.value,
+  }
+  let result = await storeToken.registration(data);
+  if (result == 201) {
+    router.push(`/sign-in`)
+  }
 }
 
 </script>
@@ -25,10 +30,12 @@ const SignUp = async () => {
     <div class="self-center login">
       <q-card flat bordered class="my-card">
         <q-card-section>
-          <div class="text-h6">SignIn</div>
+          <div class="text-h6">SignUp</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
+          <q-input outlined v-model="firstname" label="Firstname" class="q-pb-md"/>
+          <q-input outlined v-model="lastname" label="Lastname" class="q-pb-md"/>
           <q-input outlined v-model="login" label="Login" class="q-pb-md"/>
           <q-input outlined v-model="password" label="Password" class="q-pb-md"/>
         </q-card-section>
@@ -36,8 +43,8 @@ const SignUp = async () => {
         <q-separator inset />
 
         <q-card-section>
-          <q-btn color="secondary" label="SignIn" @click="SignIn"/>
-          <q-btn flat color="secondary" label="SignUp" @click="SignUp"/>
+          <q-btn color="secondary" label="SignUp" @click="SignUp"/>
+          <q-btn flat color="secondary" label="SignIn" />
         </q-card-section>
       </q-card>
     </div>

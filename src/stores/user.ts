@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import UserService from "../services/UserService";
 import type {UserResponse} from "@/models/UserResponse";
 
-export const useUserStore = defineStore('counter', () => {
+export const useUserStore = defineStore('user', () => {
     const users = ref<any>()
     const user = ref<any>()
     async function gerUsers(){
@@ -48,5 +48,16 @@ export const useUserStore = defineStore('counter', () => {
         }
     }
 
-    return { users, user, gerUsers, getUserDetail, editUserDetail, deleteUser }
+    async function createUser(data:UserResponse):Promise<any>{
+        try {
+            const response = await UserService.createUser(data);
+            if(response.status === 200){
+                return response.status
+            }
+        }catch (e) {
+            console.log(e)
+        }
+    }
+
+    return { users, user, gerUsers, getUserDetail, editUserDetail, deleteUser, createUser }
 })
