@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import {onBeforeMount, ref} from "vue";
 import {useUserStore} from "../stores/user";
-const userStore = useUserStore();
 import { useRoute } from 'vue-router';
 import router from "../router";
+
+const userStore = useUserStore();
 const userDetail = ref<any>({})
 const route = useRoute();
+
 onBeforeMount(async () => {
   if (route?.params?.id) {
     let id: string = String(route.params.id);
@@ -25,21 +27,21 @@ const deleteUser = async () => {
   <div class="q-pa-md example-row-equal-width">
     <div class="row">
       <div class="col">
-        <div class="col-4">
+        <div class="row justify-center q-my-lg">
           <q-img
-              :src="userDetail.avatar"
-              :ratio="1"
-              loading="lazy"
-              spinner-color="white"
-              style="max-width: 200px"
+            :src="userDetail.avatar"
+            :ratio="1"
+            loading="lazy"
+            spinner-color="white"
+            style="max-width: 150px; border-radius: 50%"
           />
         </div>
         <div class="row q-col-gutter-lg q-mb-md">
           <div class="col">
-            <q-input outlined v-model="userDetail.firstname" label="Login" />
+            <q-input outlined v-model="userDetail.firstname" label="Firstname" />
           </div>
           <div class="col">
-            <q-input outlined v-model="userDetail.lastname" label="Password" />
+            <q-input outlined v-model="userDetail.lastname" label="Lastname" />
           </div>
         </div>
         <div class="row q-col-gutter-lg q-mb-md">
@@ -62,8 +64,11 @@ const deleteUser = async () => {
             <q-input outlined v-model="userDetail.nation" label="Nation" />
           </div>
         </div>
-        <q-btn color="secondary" label="Edit" @click="userStore.editUserDetail({...userDetail})"/>
-        <q-btn color="red" label="Delete" @click="deleteUser"/>
+        <div class="row justify-end q-gutter-md">
+          <q-btn color="secondary" label="Edit" @click="userStore.editUserDetail({...userDetail})"/>
+          <q-btn color="red" label="Delete" @click="deleteUser"/>
+        </div>
+
       </div>
       <div class="col">
         {{ userDetail.bio }}

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-
 import {ref} from "vue";
 import {useTokenStore} from "../stores/sign-in";
 import router from "@/router";
-const storeToken = useTokenStore();
 
+const storeToken = useTokenStore();
 const login = ref<string>('');
 const password = ref<string>('');
 

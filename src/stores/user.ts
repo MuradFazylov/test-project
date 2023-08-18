@@ -9,7 +9,6 @@ export const useUserStore = defineStore('user', () => {
     async function gerUsers(){
         try {
             const response = await UserService.getUsers();
-            console.log(response.data)
             users.value = response.data
         }catch (e) {
             console.log(e)
@@ -51,7 +50,7 @@ export const useUserStore = defineStore('user', () => {
     async function createUser(data:UserResponse):Promise<any>{
         try {
             const response = await UserService.createUser(data);
-            if(response.status === 200){
+            if(response.status === 201){
                 return response.status
             }
         }catch (e) {
